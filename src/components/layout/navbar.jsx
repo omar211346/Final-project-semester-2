@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import "../../App.css"; // bare hvis ikke importert i main.jsx
 
 function Navbar() {
   return (
-    <nav style={{ padding: "1rem", background: "#eee" }}>
+    <nav className="navbar">
       <Link to="/">Home</Link> |{" "}
       <Link to="/add-recipe">Add Recipe</Link> |{" "}
       <Link to="/my-recipes">My Recipes</Link> |{" "}
