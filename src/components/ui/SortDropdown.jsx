@@ -1,11 +1,11 @@
 function SortDropdown() {
-    const handleSort = () => {
-      console.log("Sorting by selected value")
-    }
+    const handleSort = (e) => {
+      console.log("Selected sort:", e.target.value);
+    };
   
     return (
-      <div className="sortDropdown">
-        <select handleSort={handleSort}>
+      <div className="sort-dropdown">
+        <select onChange={handleSort}>
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
         </select>
@@ -14,3 +14,4 @@ function SortDropdown() {
   }
   
   export default SortDropdown;
+  
