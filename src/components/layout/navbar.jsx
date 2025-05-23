@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../../App.css"; // bare hvis ikke importert i main.jsx
+import "../../App.css";  
 
 function Navbar() {
   return (
