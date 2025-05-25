@@ -23,6 +23,7 @@ function RecipeForm({ onSubmit }) {
 <textarea placeholder="Ingredients" name="ingredients" required />
 <textarea placeholder="Instructions" name="instructions" required />
 
+
       </form>
     );
   }
