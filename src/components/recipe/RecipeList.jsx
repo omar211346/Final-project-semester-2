@@ -1,5 +1,6 @@
 import RecipeCard from "./RecipeCard";
 
+
 function RecipeList({ recipes }) {
   if (!recipes || recipes.length === 0) {
     return <div className="no-recipes">No recipes to show.</div>;
