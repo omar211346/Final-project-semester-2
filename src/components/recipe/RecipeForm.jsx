@@ -13,6 +13,16 @@ function RecipeForm({ onSubmit }) {
          </select>
 
             <input type="number" placeholder="Time (minutes)" name="time" required />
+            <select name="difficulty" required>
+             <option value="">Select difficulty</option>
+             <option value="Easy">Easy</option>
+             <option value="Medium">Medium</option>
+             <option value="Hard">Hard</option>
+            </select>
+
+<textarea placeholder="Ingredients" name="ingredients" required />
+<textarea placeholder="Instructions" name="instructions" required />
+
       </form>
     );
   }
