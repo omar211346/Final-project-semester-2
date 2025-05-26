@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import RecipeForm from "../components/recipe/RecipeForm";
 
 function EditRecipe() {
   const { id } = useParams();
@@ -16,7 +17,9 @@ function EditRecipe() {
   return (
     <div className="edit-recipe-page">
       <h2>Edit Recipe {id}</h2>
+      <RecipeForm onSubmit={() => {}} />
     </div>
   );
 }
 
+export default EditRecipe;
