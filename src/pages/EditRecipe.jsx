@@ -17,7 +17,7 @@ function EditRecipe() {
   return (
     <div className="edit-recipe-page">
       <h2>Edit Recipe {id}</h2>
-      <RecipeForm onSubmit={() => {}} />
+      <RecipeForm onSubmit={() => {}} initialData={existingRecipe} />
     </div>
   );
 }
