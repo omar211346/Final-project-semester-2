@@ -6,6 +6,7 @@ function RecipeDetails() {
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [isPinned, setIsPinned] = useState(false);
+  const [showPrintMessage, setShowPrintMessage] = useState(false);
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -13,6 +14,10 @@ function RecipeDetails() {
 
   const togglePinned = () => {
     setIsPinned(!isPinned);
+  };
+
+  const togglePrintHint = () => {
+    setShowPrintMessage(!showPrintMessage);
   };
 
   const recipe = {
@@ -45,6 +50,17 @@ function RecipeDetails() {
       <button onClick={togglePinned}>
         {isPinned ? "📌 Pinned to Home" : "📍 Pin this Recipe"}
       </button>
+
+      <button onClick={togglePrintHint}>🖨️ How to print</button>
+
+      {showPrintMessage && (
+        <div className="print-hint-box">
+          <p>
+            To print this recipe, press <strong>Ctrl+P</strong> (Windows) or <strong>⌘+P</strong> (Mac).
+          </p>
+          <button onClick={() => setShowPrintMessage(false)}>Close</button>
+        </div>
+      )}
     </div>
   );
 }
