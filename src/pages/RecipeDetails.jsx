@@ -1,9 +1,20 @@
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 function RecipeDetails() {
   const { id } = useParams();
 
-  // Dummy-oppskrift – byttes ut med Firestore senere
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
+
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+  };
+
+  const togglePinned = () => {
+    setIsPinned(!isPinned);
+  };
+
   const recipe = {
     title: "Vegetarian Lasagna",
     category: "Dinner",
@@ -26,6 +37,14 @@ function RecipeDetails() {
       <h3>Instructions</h3>
       <p>{recipe.instructions}</p>
       <p><em>Recipe ID: {id}</em></p>
+
+      <button onClick={toggleFavorite}>
+        {isFavorite ? "❤️ Favorited" : "🤍 Add to Favorites"}
+      </button>
+
+      <button onClick={togglePinned}>
+        {isPinned ? "📌 Pinned to Home" : "📍 Pin this Recipe"}
+      </button>
     </div>
   );
 }
