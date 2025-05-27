@@ -1,16 +1,9 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-
-const [isFavorite, setIsFavorite] = useState(false);
-
-const toggleFavorite = () => {
-  setIsFavorite(!isFavorite);
-};
-
 
 function RecipeDetails() {
   const { id } = useParams();
 
+  // Dummy-oppskrift – byttes ut med Firestore senere
   const recipe = {
     title: "Vegetarian Lasagna",
     category: "Dinner",
@@ -34,7 +27,6 @@ function RecipeDetails() {
       <p>{recipe.instructions}</p>
       <p><em>Recipe ID: {id}</em></p>
     </div>
-    
   );
 }
 
