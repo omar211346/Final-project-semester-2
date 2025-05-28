@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // ✅ Nå er den korrekt importert
 import RecipeList from "../components/recipe/RecipeList";
 
 function MyRecipes() {
