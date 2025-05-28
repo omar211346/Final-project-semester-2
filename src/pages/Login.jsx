@@ -10,7 +10,7 @@ function Login() {
     const password = form.password.value;
 
     console.log("Logging in with:", email, password);
-    setSuccess(true); // Vis bekreftelse
+    setSuccess(true); 
   };
 
   return (
