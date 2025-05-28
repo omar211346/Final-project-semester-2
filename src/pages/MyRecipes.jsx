@@ -19,7 +19,12 @@ function MyRecipes() {
   return (
     <div className="my-recipes-page">
       <h2>My Recipes</h2>
-      <RecipeList recipes={myRecipes} />
+
+      {myRecipes.length > 0 ? (
+        <RecipeList recipes={myRecipes} />
+      ) : (
+        <p>You haven't added any recipes yet.</p>
+      )}
     </div>
   );
 }
