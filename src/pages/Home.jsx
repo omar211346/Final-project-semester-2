@@ -7,6 +7,7 @@ import RecipeList from "../components/recipe/RecipeList";
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("newest"); // ✅ NYTT
 
   const recipes = [
     {
@@ -23,7 +24,15 @@ function Home() {
     },
   ];
 
-  const filteredRecipes = recipes.filter((recipe) =>
+  // ✅ Sorter basert på sortOrder
+  const sortedRecipes = [...recipes].sort((a, b) =>
+    sortOrder === "newest"
+      ? b.createdAt - a.createdAt
+      : a.createdAt - b.createdAt
+  );
+
+  // ✅ Filtrer basert på søk
+  const filteredRecipes = sortedRecipes.filter((recipe) =>
     recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -34,7 +43,7 @@ function Home() {
 
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <CategoryFilter />
-      <SortDropdown />
+      <SortDropdown sortOrder={sortOrder} onSortChange={setSortOrder} /> {/* ✅ FIXED */}
       <RandomRecipeButton recipes={filteredRecipes} />
 
       <h2>All Recipes</h2>
