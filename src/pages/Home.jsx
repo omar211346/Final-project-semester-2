@@ -35,7 +35,7 @@ function Home() {
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <CategoryFilter />
       <SortDropdown />
-      <RandomRecipeButton />
+      <RandomRecipeButton recipes={filteredRecipes} />
 
       <h2>All Recipes</h2>
       <RecipeList recipes={filteredRecipes} />
