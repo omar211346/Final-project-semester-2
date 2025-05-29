@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; // ✅ lagt til useEffect
+import { useState, useEffect } from "react"; 
 import SearchBar from "../components/ui/SearchBar";
 import CategoryFilter from "../components/ui/CategoryFilter";
 import SortDropdown from "../components/ui/SortDropdown";
@@ -12,9 +12,12 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log("Data loaded... men glemte å sette isLoading = false");
+    const timer = setTimeout(() => {
+      
+      setIsLoading(false); 
     }, 1000);
+
+    return () => clearTimeout(timer); 
   }, []);
 
   const recipes = [
@@ -42,6 +45,15 @@ function Home() {
     recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
     (selectedCategory === "" || recipe.category === selectedCategory)
   );
+
+  
+  if (isLoading) {
+    return (
+      <div className="home-container">
+        <p>Loading recipes...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="home-container">
