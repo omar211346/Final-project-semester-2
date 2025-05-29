@@ -1,3 +1,4 @@
+import { useState } from "react";
 import SearchBar from "../components/ui/SearchBar";
 import CategoryFilter from "../components/ui/CategoryFilter";
 import SortDropdown from "../components/ui/SortDropdown";
@@ -5,7 +6,8 @@ import RandomRecipeButton from "../components/ui/RandomRecipeButton";
 import RecipeList from "../components/recipe/RecipeList";
 
 function Home() {
-  // Midlertidige testdata
+  const [searchTerm, setSearchTerm] = useState("");
+
   const recipes = [
     {
       id: "1",
@@ -21,18 +23,22 @@ function Home() {
     },
   ];
 
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="home-container">
       <h1>Welcome to OppskriftsHub!</h1>
       <p>Find, share, and save your favorite recipes.</p>
 
-      <SearchBar />
+      <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
       <CategoryFilter />
       <SortDropdown />
       <RandomRecipeButton />
 
       <h2>All Recipes</h2>
-      <RecipeList recipes={recipes} />
+      <RecipeList recipes={filteredRecipes} />
     </div>
   );
 }
