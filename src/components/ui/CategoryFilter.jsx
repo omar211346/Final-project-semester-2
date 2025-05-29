@@ -1,15 +1,21 @@
-function CategoryFilter() {
+function CategoryFilter({ selectedCategory, onCategoryChange }) {
     const handleChange = (e) => {
-      console.log(e.target.value)
-    }
+      onCategoryChange(e.target.value); 
+    };
   
-    <div class="category-filter">
-      <select onchange="handleChange()">
-        <option value="">All Categories</option>
-        <option value="Dinner">Dinner</option>
-        <option value="Dessert">Dessert</option>
-      </select>
-    </div>
+    return (
+      <div className="category-filter">
+        <select value={selectedCategory} onChange={handleChange}>
+          <option value="">All Categories</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Dessert">Dessert</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Vegetarian">Vegetarian</option>
+          <option value="Snack">Snack</option>
+        </select>
+      </div>
+    );
   }
   
   export default CategoryFilter;
+  
