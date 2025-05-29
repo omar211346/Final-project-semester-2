@@ -1,7 +1,7 @@
 function Profile() {
     const user = {
-      username: "FarahDev",
-      email: "farah@example.com",
+      username: "dev",
+      email: "dev@example.com",
       createdAt: new Date("2024-09-01"),
     };
   
