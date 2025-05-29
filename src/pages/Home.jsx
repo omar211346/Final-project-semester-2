@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react"; // ✅ lagt til useEffect
 import SearchBar from "../components/ui/SearchBar";
 import CategoryFilter from "../components/ui/CategoryFilter";
 import SortDropdown from "../components/ui/SortDropdown";
@@ -8,7 +8,14 @@ import RecipeList from "../components/recipe/RecipeList";
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
-  const [selectedCategory, setSelectedCategory] = useState(""); 
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [isLoading, setIsLoading] = useState(true); 
+
+  useEffect(() => {
+    setTimeout(() => {
+      console.log("Data loaded... men glemte å sette isLoading = false");
+    }, 1000);
+  }, []);
 
   const recipes = [
     {
