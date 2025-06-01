@@ -2,7 +2,7 @@ import { useState } from "react";
 import RecipeForm from "../components/recipe/RecipeForm";
 
 function AddRecipe() {
-  const [message, setMessage] = useState(null); // ✅ Trinn 1 – statusmelding
+  const [message, setMessage] = useState(null); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +21,7 @@ function AddRecipe() {
 
     console.log("Recipe submitted:", newRecipe);
     setMessage("Recipe saved successfully!");
+    form.reset(); // 
   };
 
   return (
