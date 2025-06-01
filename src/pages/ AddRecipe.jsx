@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import RecipeForm from "../components/recipe/RecipeForm";
 
 function AddRecipe() {
-  const [message, setMessage] = useState(null); 
+  const [message, setMessage] = useState(null);
+  const navigate = useNavigate(); 
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,12 +18,17 @@ function AddRecipe() {
       ingredients: form.ingredients.value,
       instructions: form.instructions.value,
       image: form.image.value,
-      createdAt: new Date(), 
+      createdAt: new Date(),
     };
 
     console.log("Recipe submitted:", newRecipe);
     setMessage("Recipe saved successfully!");
-    form.reset(); // 
+    form.reset(); 
+
+    
+    setTimeout(() => {
+      navigate("/my-recipes");
+    }, 1000);
   };
 
   return (
