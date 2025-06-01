@@ -45,7 +45,7 @@ function EditRecipe() {
     };
 
     console.log("Edited recipe:", updatedRecipe);
-    setMessage("Recipe updated successfully!"); // ✅ Trinn 3
+    setMessage("Recipe updated successfully!"); 
   };
 
   return (
