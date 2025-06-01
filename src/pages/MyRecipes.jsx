@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom"; // ✅ Nå er den korrekt importert
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import RecipeList from "../components/recipe/RecipeList";
 
 function MyRecipes() {
   const navigate = useNavigate();
 
-  const myRecipes = [
+  const initialRecipes = [
     {
       id: "r1",
       title: "Homemade Pizza",
@@ -19,6 +20,8 @@ function MyRecipes() {
     },
   ];
 
+  const [myRecipes, setMyRecipes] = useState(initialRecipes);
+
   const handleAddRecipe = () => {
     navigate("/add-recipe");
   };
@@ -26,7 +29,6 @@ function MyRecipes() {
   return (
     <div className="my-recipes-page">
       <h2>My Recipes</h2>
-
       <button onClick={handleAddRecipe}>➕ Add New Recipe</button>
 
       {myRecipes.length > 0 ? (
