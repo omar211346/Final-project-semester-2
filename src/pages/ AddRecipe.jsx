@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import RecipeForm from "../components/recipe/RecipeForm";
-import { addRecipe } from "../lib/firestore";
-
+import { addRecipe } from "../lib/firestore"; 
 
 function AddRecipe() {
   const [message, setMessage] = useState(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -23,14 +22,19 @@ function AddRecipe() {
       createdAt: new Date(),
     };
 
-    console.log("Recipe submitted:", newRecipe);
-    setMessage("Recipe saved successfully!");
-    form.reset(); 
+    try {
+      const id = await addRecipe(newRecipe); 
+      console.log("Recipe saved with ID:", id);
+      setMessage("Recipe saved successfully!");
+      form.reset();
 
-    
-    setTimeout(() => {
-      navigate("/my-recipes");
-    }, 1000);
+      setTimeout(() => {
+        navigate("/my-recipes");
+      }, 1000);
+    } catch (error) {
+      console.error("Failed to save recipe:", error);
+      setMessage("Failed to save recipe.");
+    }
   };
 
   return (
