@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import RecipeList from "../components/recipe/RecipeList";
 
 function MyRecipes() {
   const navigate = useNavigate();
@@ -21,6 +20,7 @@ function MyRecipes() {
   ];
 
   const [myRecipes, setMyRecipes] = useState(initialRecipes);
+  const [message, setMessage] = useState(null); 
 
   const handleAddRecipe = () => {
     navigate("/add-recipe");
@@ -29,11 +29,15 @@ function MyRecipes() {
   const handleDelete = (id) => {
     const updatedRecipes = myRecipes.filter((recipe) => recipe.id !== id);
     setMyRecipes(updatedRecipes);
+    setMessage("Recipe deleted!"); 
   };
 
   return (
     <div className="my-recipes-page">
       <h2>My Recipes</h2>
+
+      {message && <div className="feedback-message">{message}</div>} 
+
       <button onClick={handleAddRecipe}>➕ Add New Recipe</button>
 
       {myRecipes.length > 0 ? (
