@@ -4,36 +4,30 @@ import CategoryFilter from "../components/ui/CategoryFilter";
 import SortDropdown from "../components/ui/SortDropdown";
 import RandomRecipeButton from "../components/ui/RandomRecipeButton";
 import RecipeList from "../components/recipe/RecipeList";
+import { getAllRecipes } from "../lib/firestore"; // ✅ Ny import
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("newest");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isLoading, setIsLoading] = useState(true); 
+  const [recipes, setRecipes] = useState([]); 
+  const [error, setError] = useState(null); 
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      
-      setIsLoading(false); 
-    }, 1000);
+    async function fetchRecipes() {
+      try {
+        const data = await getAllRecipes();
+        setRecipes(data);
+      } catch (err) {
+        setError("Failed to load recipes.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
-    return () => clearTimeout(timer); 
+    fetchRecipes();
   }, []);
-
-  const recipes = [
-    {
-      id: "1",
-      title: "Vegetarian Pasta",
-      category: "Dinner",
-      createdAt: new Date("2024-10-01"),
-    },
-    {
-      id: "2",
-      title: "Chocolate Cake",
-      category: "Dessert",
-      createdAt: new Date("2025-03-15"),
-    },
-  ];
 
   const sortedRecipes = [...recipes].sort((a, b) =>
     sortOrder === "newest"
@@ -46,11 +40,18 @@ function Home() {
     (selectedCategory === "" || recipe.category === selectedCategory)
   );
 
-  
   if (isLoading) {
     return (
       <div className="home-container">
         <p>Loading recipes...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="home-container">
+        <p>{error}</p>
       </div>
     );
   }
