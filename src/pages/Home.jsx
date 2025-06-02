@@ -4,7 +4,7 @@ import CategoryFilter from "../components/ui/CategoryFilter";
 import SortDropdown from "../components/ui/SortDropdown";
 import RandomRecipeButton from "../components/ui/RandomRecipeButton";
 import RecipeList from "../components/recipe/RecipeList";
-import { getAllRecipes } from "../lib/firestore"; // ✅ Ny import
+import { getAllRecipes } from "../lib/firestore";
 
 function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -18,16 +18,20 @@ function Home() {
     async function fetchRecipes() {
       try {
         const data = await getAllRecipes();
-        setRecipes(data);
+        const formatted = data.map((r) => ({
+          ...r,
+          createdAt: r.createdAt?.toDate ? r.createdAt.toDate() : new Date(),
+        }));
+  
+        setRecipes(formatted);
       } catch (err) {
         setError("Failed to load recipes.");
       } finally {
         setIsLoading(false);
       }
     }
-
     fetchRecipes();
-  }, []);
+  }, []);  
 
   const sortedRecipes = [...recipes].sort((a, b) =>
     sortOrder === "newest"
