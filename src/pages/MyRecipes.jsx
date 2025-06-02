@@ -26,13 +26,26 @@ function MyRecipes() {
     navigate("/add-recipe");
   };
 
+  const handleDelete = (id) => {
+    const updatedRecipes = myRecipes.filter((recipe) => recipe.id !== id);
+    setMyRecipes(updatedRecipes);
+  };
+
   return (
     <div className="my-recipes-page">
       <h2>My Recipes</h2>
       <button onClick={handleAddRecipe}>➕ Add New Recipe</button>
 
       {myRecipes.length > 0 ? (
-        <RecipeList recipes={myRecipes} />
+        <ul className="recipe-list">
+          {myRecipes.map((recipe) => (
+            <li key={recipe.id}>
+              <strong>{recipe.title}</strong> ({recipe.category}) -{" "}
+              {new Date(recipe.createdAt).toLocaleDateString()}
+              <button onClick={() => handleDelete(recipe.id)}>🗑️ Delete</button>
+            </li>
+          ))}
+        </ul>
       ) : (
         <p>You haven't added any recipes yet.</p>
       )}
