@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getRecipeById } from "../lib/firestore";
 
 function RecipeDetails() {
   const { id } = useParams();
@@ -8,32 +9,41 @@ function RecipeDetails() {
   const [isPinned, setIsPinned] = useState(false);
   const [showPrintMessage, setShowPrintMessage] = useState(false);
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
+  const [recipe, setRecipe] = useState(null); // ✅ hentet fra Firestore
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const togglePinned = () => {
-    setIsPinned(!isPinned);
-  };
+  const toggleFavorite = () => setIsFavorite(!isFavorite);
+  const togglePinned = () => setIsPinned(!isPinned);
+  const togglePrintHint = () => setShowPrintMessage(!showPrintMessage);
 
-  const togglePrintHint = () => {
-    setShowPrintMessage(!showPrintMessage);
-  };
+  useEffect(() => {
+    async function fetchRecipe() {
+      try {
+        const data = await getRecipeById(id);
+        setRecipe(data);
+      } catch (err) {
+        setError("Recipe not found or failed to load.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
-  const recipe = {
-    title: "Vegetarian Lasagna",
-    category: "Dinner",
-    time: "45",
-    difficulty: "Medium",
-    ingredients: "Lasagna sheets, tomato sauce, cheese",
-    instructions: "Layer everything. Bake in oven. Serve hot.",
-    image: "https://example.com/lasagna.jpg",
-  };
+    fetchRecipe();
+  }, [id]);
+
+  if (isLoading) return <p>Loading recipe...</p>;
+  if (error) return <p>{error}</p>;
+  if (!recipe) return <p>No recipe found.</p>;
 
   return (
     <div className="recipe-details-page">
       <h2>{recipe.title}</h2>
-      <img src={recipe.image} alt={recipe.title} style={{ maxWidth: "300px" }} />
+      <img
+        src={recipe.image}
+        alt={recipe.title}
+        style={{ maxWidth: "300px" }}
+      />
       <p><strong>Category:</strong> {recipe.category}</p>
       <p><strong>Time:</strong> {recipe.time} minutes</p>
       <p><strong>Difficulty:</strong> {recipe.difficulty}</p>
@@ -41,7 +51,12 @@ function RecipeDetails() {
       <p>{recipe.ingredients}</p>
       <h3>Instructions</h3>
       <p>{recipe.instructions}</p>
-      <p><em>Recipe ID: {id}</em></p>
+      <p>
+        <em>
+          Published:{" "}
+          {recipe.createdAt?.toDate?.().toLocaleDateString() ?? "Unknown"}
+        </em>
+      </p>
 
       <button onClick={toggleFavorite}>
         {isFavorite ? "❤️ Favorited" : "🤍 Add to Favorites"}
@@ -56,7 +71,8 @@ function RecipeDetails() {
       {showPrintMessage && (
         <div className="print-hint-box">
           <p>
-            To print this recipe, press <strong>Ctrl+P</strong> (Windows) or <strong>⌘+P</strong> (Mac).
+            To print this recipe, press <strong>Ctrl+P</strong> (Windows) or{" "}
+            <strong>⌘+P</strong> (Mac).
           </p>
           <button onClick={() => setShowPrintMessage(false)}>Close</button>
         </div>
