@@ -1,6 +1,6 @@
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
-
+import { doc, getDoc } from "firebase/firestore";
 
 export async function addRecipe(recipe) {
   try {
@@ -26,6 +26,22 @@ export async function getAllRecipes() {
     return recipes;
   } catch (error) {
     console.error("Error fetching recipes:", error);
+    throw error;
+  }
+}
+
+export async function getRecipeById(id) {
+  try {
+    const docRef = doc(db, "recipes", id);
+    const snapshot = await getDoc(docRef);
+
+    if (snapshot.exists()) {
+      return { id: snapshot.id, ...snapshot.data() };
+    } else {
+      throw new Error("Recipe not found");
+    }
+  } catch (error) {
+    console.error("Error fetching recipe:", error);
     throw error;
   }
 }
