@@ -10,6 +10,8 @@ function Navbar() {
       <Link to="/profile">Profile</Link> |{" "}
       <Link to="/login">Login</Link> |{" "}
       <Link to="/signup">Signup</Link>
+      <Link to="/external-recipes">Explore</Link>
+
     </nav>
   );
 }
