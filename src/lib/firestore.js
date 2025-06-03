@@ -1,6 +1,6 @@
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
+
 export async function addRecipe(recipe) {
   try {
     const docRef = await addDoc(collection(db, "recipes"), recipe);
@@ -41,6 +41,16 @@ export async function getRecipeById(id) {
     }
   } catch (error) {
     console.error("Error fetching recipe:", error);
+    throw error;
+  }
+}
+
+export async function updateRecipe(id, updatedData) {
+  try {
+    const docRef = doc(db, "recipes", id);
+    await updateDoc(docRef, updatedData);
+  } catch (error) {
+    console.error("Error updating recipe:", error);
     throw error;
   }
 }

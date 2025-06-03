@@ -1,22 +1,28 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RecipeForm from "../components/recipe/RecipeForm";
+import { getRecipeById, updateRecipe } from "../lib/firestore";
 
 function EditRecipe() {
   const { id } = useParams();
-  const [message, setMessage] = useState(null); 
+  const [recipe, setRecipe] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
 
-  const existingRecipe = {
-    title: "Testoppskrift",
-    category: "Dinner",
-    time: "30",
-    difficulty: "Easy",
-    ingredients: "Pasta, Tomatoes",
-    instructions: "Boil pasta. Make sauce. Mix.",
-    image: "https://example.com/image.jpg",
-  };
+  useEffect(() => {
+    async function loadRecipe() {
+      try {
+        const data = await getRecipeById(id);
+        setRecipe(data);
+      } catch (err) {
+        console.error("Failed to load recipe:", err);
+        setError("Failed to load recipe.");
+      }
+    }
+    loadRecipe();
+  }, [id]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
 
@@ -44,17 +50,23 @@ function EditRecipe() {
       updatedAt: new Date(),
     };
 
-    console.log("Edited recipe:", updatedRecipe);
-    setMessage("Recipe updated successfully!"); 
+    try {
+      await updateRecipe(id, updatedRecipe);
+      setMessage("Recipe updated successfully!");
+    } catch (err) {
+      console.error("Failed to update recipe:", err);
+      setMessage("Failed to update recipe.");
+    }
   };
+
+  if (error) return <p>{error}</p>;
+  if (!recipe) return <p>Loading recipe...</p>;
 
   return (
     <div className="edit-recipe-page">
-      <h2>Edit Recipe {id}</h2>
-
+      <h2>Edit Recipe</h2>
       {message && <div className="feedback-message">{message}</div>}
-
-      <RecipeForm onSubmit={handleSubmit} initialData={existingRecipe} />
+      <RecipeForm onSubmit={handleSubmit} initialData={recipe} />
     </div>
   );
 }
