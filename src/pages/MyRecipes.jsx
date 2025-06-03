@@ -1,42 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAllRecipes, deleteRecipe } from "../lib/firestore"; 
 
 function MyRecipes() {
   const navigate = useNavigate();
+  const [myRecipes, setMyRecipes] = useState([]);
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
 
-  const initialRecipes = [
-    {
-      id: "r1",
-      title: "Homemade Pizza",
-      category: "Dinner",
-      createdAt: new Date("2025-01-10"),
-    },
-    {
-      id: "r2",
-      title: "Fruit Smoothie",
-      category: "Snack",
-      createdAt: new Date("2025-02-05"),
-    },
-  ];
+  
+  useEffect(() => {
+    async function fetchRecipes() {
+      try {
+        const recipes = await getAllRecipes();
+        setMyRecipes(recipes);
+      } catch (err) {
+        setError("Failed to load recipes.");
+      }
+    }
 
-  const [myRecipes, setMyRecipes] = useState(initialRecipes);
-  const [message, setMessage] = useState(null); 
+    fetchRecipes();
+  }, []);
 
   const handleAddRecipe = () => {
     navigate("/add-recipe");
   };
 
-  const handleDelete = (id) => {
-    const updatedRecipes = myRecipes.filter((recipe) => recipe.id !== id);
-    setMyRecipes(updatedRecipes);
-    setMessage("Recipe deleted!"); 
+ 
+  const handleDelete = async (id) => {
+    try {
+      await deleteRecipe(id);
+      setMyRecipes((prev) => prev.filter((recipe) => recipe.id !== id));
+      setMessage("Recipe deleted!");
+    } catch {
+      setError("Could not delete recipe.");
+    }
   };
 
   return (
     <div className="my-recipes-page">
       <h2>My Recipes</h2>
 
-      {message && <div className="feedback-message">{message}</div>} 
+      {message && <div className="feedback-message">{message}</div>}
+      {error && <div className="error-message">{error}</div>} 
 
       <button onClick={handleAddRecipe}>➕ Add New Recipe</button>
 
@@ -45,7 +51,7 @@ function MyRecipes() {
           {myRecipes.map((recipe) => (
             <li key={recipe.id}>
               <strong>{recipe.title}</strong> ({recipe.category}) -{" "}
-              {new Date(recipe.createdAt).toLocaleDateString()}
+              {recipe.createdAt?.toDate?.().toLocaleDateString() ?? "Unknown"}
               <button onClick={() => handleDelete(recipe.id)}>🗑️ Delete</button>
             </li>
           ))}
