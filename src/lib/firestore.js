@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, doc, getDoc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, getDoc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
 export async function addRecipe(recipe) {
@@ -51,6 +51,16 @@ export async function updateRecipe(id, updatedData) {
     await updateDoc(docRef, updatedData);
   } catch (error) {
     console.error("Error updating recipe:", error);
+    throw error;
+  }
+}
+
+export async function deleteRecipe(id) {
+  try {
+    const docRef = doc(db, "recipes", id);
+    await deleteDoc(docRef);
+  } catch (error) {
+    console.error("Error deleting recipe:", error);
     throw error;
   }
 }
