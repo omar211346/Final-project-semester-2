@@ -1,13 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import RecipeForm from "../components/recipe/RecipeForm";
 import { getRecipeById, updateRecipe } from "../lib/firestore";
 
 function EditRecipe() {
   const { id } = useParams();
+  const navigate = useNavigate(); 
+
   const [recipe, setRecipe] = useState(null);
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadRecipe() {
@@ -17,6 +20,8 @@ function EditRecipe() {
       } catch (err) {
         console.error("Failed to load recipe:", err);
         setError("Failed to load recipe.");
+      } finally {
+        setIsLoading(false); 
       }
     }
     loadRecipe();
@@ -53,14 +58,18 @@ function EditRecipe() {
     try {
       await updateRecipe(id, updatedRecipe);
       setMessage("Recipe updated successfully!");
+      setTimeout(() => {
+        navigate("/my-recipes");
+      }, 1000);
     } catch (err) {
       console.error("Failed to update recipe:", err);
       setMessage("Failed to update recipe.");
     }
   };
 
+  if (isLoading) return <p>Loading recipe...</p>;
   if (error) return <p>{error}</p>;
-  if (!recipe) return <p>Loading recipe...</p>;
+  if (!recipe) return <p>Recipe not found.</p>;
 
   return (
     <div className="edit-recipe-page">
