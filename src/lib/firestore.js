@@ -1,5 +1,5 @@
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import { db } from "../firebaseConfig";
+import { db } from "./firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 export async function addRecipe(recipe) {
   try {
