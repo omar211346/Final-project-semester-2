@@ -13,11 +13,11 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
+  const [allCategories, setAllCategories] = useState([]); // ✅ Steg 2
 
   useEffect(() => {
     async function fetchRecipes() {
       try {
-        // Hent fra Firestore
         const firestoreData = await getAllRecipes();
         const formattedFirestore = firestoreData.map((r) => ({
           id: r.id,
@@ -26,18 +26,24 @@ function Home() {
           createdAt: r.createdAt?.toDate ? r.createdAt.toDate() : new Date(),
         }));
 
-        // Hent fra TheMealDB API
         const res = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=");
         const apiData = await res.json();
         const externalRecipes = (apiData.meals || []).map((meal) => ({
           id: `api-${meal.idMeal}`,
           title: meal.strMeal,
           category: meal.strCategory,
-          createdAt: new Date(), // API mangler dato
+          createdAt: new Date(),
+          image: meal.strMealThumb,
+          instructions: meal.strInstructions,
         }));
+        
+        const allRecipes = [...formattedFirestore, ...externalRecipes];
+        setRecipes(allRecipes);
 
-        // Kombiner begge kilder
-        setRecipes([...formattedFirestore, ...externalRecipes]);
+        const categories = [
+          ...new Set(allRecipes.map((r) => r.category).filter(Boolean)),
+        ];
+        setAllCategories(categories.sort());
       } catch (err) {
         setError("Failed to load recipes.");
         console.error(err);
@@ -74,7 +80,11 @@ function Home() {
       <p>Find, share, and save your favorite recipes.</p>
 
       <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
-      <CategoryFilter selectedCategory={selectedCategory} onCategoryChange={setSelectedCategory} />
+      <CategoryFilter
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        categories={allCategories} // ✅ Steg 2
+      />
       <SortDropdown sortOrder={sortOrder} onSortChange={setSortOrder} />
       <RandomRecipeButton recipes={filteredRecipes} />
 

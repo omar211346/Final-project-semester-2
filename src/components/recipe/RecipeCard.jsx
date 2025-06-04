@@ -6,21 +6,23 @@ function RecipeCard({ title, category, createdAt, image, instructions }) {
       <h3>{title}</h3>
 
       {image && (
-        <img src={image} alt={title} style={{ width: "200px" }} />
+        <img
+          src={image}
+          alt={title}
+          style={{ width: "200px", marginBottom: "10px" }}
+        />
       )}
 
-      <p>Category: {category || "Unknown"}</p>
-
-      {instructions && (
-        <p><strong>Instructions:</strong> {instructions.slice(0, 100)}...</p>
-      )}
+      <p><strong>Category:</strong> {category}</p>
 
       <p>
-        Published:{" "}
-        {displayDate
-          ? displayDate.toLocaleDateString()
-          : "Unknown date"}
+        <strong>Published:</strong>{" "}
+        {displayDate ? displayDate.toLocaleDateString() : "Unknown"}
       </p>
+
+      {instructions && (
+        <p><strong>Instructions:</strong> {instructions.slice(0, 80)}...</p>
+      )}
     </div>
   );
 }
