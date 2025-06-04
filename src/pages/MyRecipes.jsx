@@ -39,6 +39,10 @@ function MyRecipes() {
     navigate(`/edit/${id}`);
   };
 
+  const handleView = (id) => {
+    navigate(`/recipe/${id}`);
+  };
+
   return (
     <div className="my-recipes-page">
       <h2>My Recipes</h2>
@@ -51,14 +55,14 @@ function MyRecipes() {
       {myRecipes.length > 0 ? (
         <div className="recipe-list">
           {myRecipes.map((recipe) => (
-            <div key={recipe.id} className="recipe-card">
+            <div key={recipe.id} className="recipe-card" style={{ border: "1px solid #ccc", padding: "1rem", margin: "1rem 0", borderRadius: "5px" }}>
               <h3>{recipe.title}</h3>
 
               {recipe.image && (
                 <img
                   src={recipe.image}
                   alt={recipe.title}
-                  style={{ width: "250px", marginBottom: "1rem" }}
+                  style={{ width: "250px", marginBottom: "1rem", borderRadius: "6px" }}
                 />
               )}
 
@@ -72,7 +76,8 @@ function MyRecipes() {
               )}
 
               <div style={{ marginTop: "0.5rem" }}>
-                <button onClick={() => handleEdit(recipe.id)}>✏️ Edit</button>
+                <button onClick={() => handleView(recipe.id)}>👁️ View</button>
+                <button onClick={() => handleEdit(recipe.id)} style={{ marginLeft: "0.5rem" }}>✏️ Edit</button>
                 <button onClick={() => handleDelete(recipe.id)} style={{ marginLeft: "0.5rem" }}>🗑️ Delete</button>
               </div>
             </div>
