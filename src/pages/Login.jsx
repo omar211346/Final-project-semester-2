@@ -1,39 +1,35 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [success, setSuccess] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const email = form.email.value;
+    const username = form.username.value;
     const password = form.password.value;
 
-    // Simulert validering
-    if (!email.includes("@")) {
-      setErrorMessage("❌ Please enter a valid email.");
-      setSuccess(false);
-      return;
+    // Enkelt sjekk, her kan du legge inn flere brukere
+    if (username === "dev" && password === "1234") {
+      const userData = {
+        username,
+        joined: new Date().toISOString()
+      };
+      localStorage.setItem("loggedInUser", JSON.stringify(userData));
+      navigate("/profile");
+    } else {
+      setMessage("❌ Invalid username or password");
     }
-
-    console.log("Logging in with:", email, password);
-    setSuccess(true);
-    setSuccessMessage("✅ Logged in successfully!");
-    setErrorMessage(null);
-    form.reset(); // tøm skjemaet
   };
 
   return (
     <div className="login-page">
       <h2>Login</h2>
-
-      {success && <p className="success-message">{successMessage}</p>}
-      {!success && errorMessage && <p className="error-message">{errorMessage}</p>}
-
+      {message && <p>{message}</p>}
       <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Email" required />
+        <input type="text" name="username" placeholder="Username" required />
         <input type="password" name="password" placeholder="Password" required />
         <button type="submit">Log in</button>
       </form>
