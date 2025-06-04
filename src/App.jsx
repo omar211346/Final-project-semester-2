@@ -1,18 +1,28 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import RecipeDetails from "./pages/RecipeDetails";
-import ExternalRecipes from "./pages/ExternalRecipes";
+import Navbar from "./components/layout/navbar"; 
 
+import Home from "./pages/Home";
+import MyRecipes from "./pages/MyRecipes";
+import AddRecipe from "./pages/AddRecipe";
+import ExternalRecipes from "./pages/ExternalRecipes";
+import RecipeDetails from "./pages/RecipeDetails";
+import EditRecipe from "./pages/EditRecipe";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/recipe/:id" element={<RecipeDetails />} />
-      <Route path="/external-recipes" element={<ExternalRecipes />} />
-    </Routes>
+    <>
+      <Navbar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/my-recipes" element={<MyRecipes />} />
+        <Route path="/add-recipe" element={<AddRecipe />} />
+        <Route path="/external-recipes" element={<ExternalRecipes />} />
+        <Route path="/recipe/:id" element={<RecipeDetails />} />
+        <Route path="/edit/:id" element={<EditRecipe />} />
+      </Routes>
+    </>
   );
 }
 
 export default App;
-
