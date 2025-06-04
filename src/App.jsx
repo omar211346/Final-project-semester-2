@@ -10,6 +10,9 @@ import ExternalRecipeDetails from "./pages/ExternalRecipeDetails";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import "./reset.css";
+import "./variables.css";
+import "./app.css";
 function App() {
   return (
     <>
