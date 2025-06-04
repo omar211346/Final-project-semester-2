@@ -60,11 +60,11 @@ function Home() {
       ? b.createdAt - a.createdAt
       : a.createdAt - b.createdAt
   );
-
   const filteredRecipes = sortedRecipes.filter((recipe) =>
-    recipe.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    (recipe.title || "").toLowerCase().includes(searchTerm.toLowerCase()) &&
     (selectedCategory === "" || recipe.category === selectedCategory)
   );
+  
 
   if (isLoading) {
     return <div className="home-container"><p>Loading recipes...</p></div>;
