@@ -7,7 +7,7 @@ import AddRecipe from "./pages/AddRecipe";
 import ExternalRecipes from "./pages/ExternalRecipes";
 import RecipeDetails from "./pages/RecipeDetails";
 import EditRecipe from "./pages/EditRecipe";
-
+import ExternalRecipeDetails from "./pages/ExternalRecipeDetails";
 function App() {
   return (
     <>
@@ -18,6 +18,7 @@ function App() {
         <Route path="/my-recipes" element={<MyRecipes />} />
         <Route path="/add-recipe" element={<AddRecipe />} />
         <Route path="/external-recipes" element={<ExternalRecipes />} />
+        <Route path="/external-recipe/:id" element={<ExternalRecipeDetails />} /> 
         <Route path="/recipe/:id" element={<RecipeDetails />} />
         <Route path="/edit/:id" element={<EditRecipe />} />
       </Routes>
