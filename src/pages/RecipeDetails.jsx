@@ -9,7 +9,7 @@ function RecipeDetails() {
   const [isPinned, setIsPinned] = useState(false);
   const [showPrintMessage, setShowPrintMessage] = useState(false);
 
-  const [recipe, setRecipe] = useState(null); // ✅ hentet fra Firestore
+  const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -36,14 +36,18 @@ function RecipeDetails() {
   if (error) return <p>{error}</p>;
   if (!recipe) return <p>No recipe found.</p>;
 
+  const displayDate = recipe.createdAt?.toDate?.() || new Date(recipe.createdAt);
+
   return (
     <div className="recipe-details-page">
       <h2>{recipe.title}</h2>
-      <img
-        src={recipe.image}
-        alt={recipe.title}
-        style={{ maxWidth: "300px" }}
-      />
+      {recipe.image && (
+        <img
+          src={recipe.image}
+          alt={recipe.title}
+          style={{ maxWidth: "300px" }}
+        />
+      )}
       <p><strong>Category:</strong> {recipe.category}</p>
       <p><strong>Time:</strong> {recipe.time} minutes</p>
       <p><strong>Difficulty:</strong> {recipe.difficulty}</p>
@@ -52,10 +56,7 @@ function RecipeDetails() {
       <h3>Instructions</h3>
       <p>{recipe.instructions}</p>
       <p>
-        <em>
-          Published:{" "}
-          {recipe.createdAt?.toDate?.().toLocaleDateString() ?? "Unknown"}
-        </em>
+        <em>Published: {displayDate.toLocaleDateString()}</em>
       </p>
 
       <button onClick={toggleFavorite}>
