@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllRecipes, deleteRecipe } from "../lib/firestore"; 
+import { getAllRecipes, deleteRecipe } from "../lib/firestore";
 
 function MyRecipes() {
   const navigate = useNavigate();
@@ -8,7 +8,6 @@ function MyRecipes() {
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
 
-  
   useEffect(() => {
     async function fetchRecipes() {
       try {
@@ -26,7 +25,6 @@ function MyRecipes() {
     navigate("/add-recipe");
   };
 
- 
   const handleDelete = async (id) => {
     try {
       await deleteRecipe(id);
@@ -37,25 +35,49 @@ function MyRecipes() {
     }
   };
 
+  const handleEdit = (id) => {
+    navigate(`/edit/${id}`);
+  };
+
   return (
     <div className="my-recipes-page">
       <h2>My Recipes</h2>
 
       {message && <div className="feedback-message">{message}</div>}
-      {error && <div className="error-message">{error}</div>} 
+      {error && <div className="error-message">{error}</div>}
 
       <button onClick={handleAddRecipe}>➕ Add New Recipe</button>
 
       {myRecipes.length > 0 ? (
-        <ul className="recipe-list">
+        <div className="recipe-list">
           {myRecipes.map((recipe) => (
-            <li key={recipe.id}>
-              <strong>{recipe.title}</strong> ({recipe.category}) -{" "}
-              {recipe.createdAt?.toDate?.().toLocaleDateString() ?? "Unknown"}
-              <button onClick={() => handleDelete(recipe.id)}>🗑️ Delete</button>
-            </li>
+            <div key={recipe.id} className="recipe-card">
+              <h3>{recipe.title}</h3>
+
+              {recipe.image && (
+                <img
+                  src={recipe.image}
+                  alt={recipe.title}
+                  style={{ width: "250px", marginBottom: "1rem" }}
+                />
+              )}
+
+              <p><strong>Category:</strong> {recipe.category}</p>
+              <p><strong>Difficulty:</strong> {recipe.difficulty || "N/A"}</p>
+              <p><strong>Time:</strong> {recipe.time || "Unknown"}</p>
+              <p><strong>Published:</strong> {recipe.createdAt?.toDate?.().toLocaleDateString() ?? "Unknown"}</p>
+
+              {recipe.instructions && (
+                <p><strong>Instructions:</strong> {recipe.instructions.slice(0, 100)}...</p>
+              )}
+
+              <div style={{ marginTop: "0.5rem" }}>
+                <button onClick={() => handleEdit(recipe.id)}>✏️ Edit</button>
+                <button onClick={() => handleDelete(recipe.id)} style={{ marginLeft: "0.5rem" }}>🗑️ Delete</button>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>You haven't added any recipes yet.</p>
       )}
