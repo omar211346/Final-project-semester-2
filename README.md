@@ -1,12 +1,34 @@
-# React + Vite
+# OppskriftsHub 🍲
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Et komplett oppskriftsunivers laget med React, Firebase og TheMealDB API.
 
-Currently, two official plugins are available:
+## 🚀 Funksjoner
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Legg til, rediger og slett egne oppskrifter
+- Utforsk internasjonale oppskrifter fra TheMealDB
+- Favoritt- og pin-funksjon
+- Pålogging og registrering med Firebase Authentication
+- Responsivt design og gjennomført brukergrensesnitt
 
-## Expanding the ESLint configuration
+## 🛠 Teknologi
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React + Vite
+- Firebase Firestore + Auth
+- TheMealDB API
+- CSS Modules og custom fonts (Roboto & Lato)
+
+## 🔍 Hvordan bruke
+
+1. Utforsk offentlige oppskrifter i **Explore**
+2. Lag din egen med **Add Recipe**
+3. Administrer og vis oppskrifter via **My Recipes**
+4. Logg inn for å bruke alle funksjoner
+
+## 🔍 Github
+
+https://github.com/omar211346/Final-project-semester-2.git
+
+netlify
+https://68412c79a865880009ffa7bc--clever-shortbread-c075c9.netlify.app/
+
+
