@@ -1,4 +1,4 @@
-import "../styles/recipeform.css";
+import "../../styles/RecipeForm.css";
 function RecipeForm({ onSubmit, initialData = {} }) {
     return (
       <form className="recipe-form" onSubmit={onSubmit}>

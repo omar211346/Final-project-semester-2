@@ -1,0 +1,44 @@
+
+.add-recipe-page {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .add-recipe-page h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+  }
+  
+  .feedback-message,
+  .error-message {
+    text-align: center;
+    font-weight: bold;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 5px;
+  }
+  
+  .feedback-message {
+    background-color: #dff0d8;
+    color: #3c763d;
+  }
+  
+  .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  /* Optional spacing for RecipeForm if needed */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
