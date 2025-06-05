@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getAllRecipes } from "../lib/firestore";
 import RecipeCard from "../components/recipe/RecipeCard";
-import '../css/home.css';
+import "../styles/home.css";
+
 
 
 
