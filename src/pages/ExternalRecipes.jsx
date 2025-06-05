@@ -4,7 +4,7 @@ import SearchBar from "../components/ui/SearchBar";
 import CategoryFilter from "../components/ui/CategoryFilter";
 import SortDropdown from "../components/ui/SortDropdown";
 import RandomRecipeButton from "../components/ui/RandomRecipeButton";
-import "../styles/ExternalRecipes.css";
+import "../styles/externalrecipes.css";
 
 
 function ExternalRecipes() {
