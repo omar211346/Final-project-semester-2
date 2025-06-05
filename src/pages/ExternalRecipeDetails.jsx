@@ -1,5 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import "../styles/exteranalrecipedetails.css";
+
 
 function ExternalRecipeDetails() {
   const { id } = useParams();
