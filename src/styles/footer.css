@@ -1,0 +1,30 @@
+.site-footer {
+    background-color: #f8f9fa;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 4rem;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.03);
+  }
+  
+  .site-footer p {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .footer-links {
+    margin-top: 0.5rem;
+  }
+  
+  .footer-links a {
+    margin: 0 0.75rem;
+    text-decoration: none;
+    color: #0077cc;
+    font-weight: 500;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }

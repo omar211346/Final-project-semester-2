@@ -1,9 +1,18 @@
+import "../../styles/footer.css";
+import { Link } from "react-router-dom";
 function Footer() {
-    return (
-      <footer className="footer">
-        <p>© 2025 OppskriftsHub</p>
-      </footer>
-    );
-  }
-  
-  export default Footer;
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="site-footer">
+      <p>© {year} OppskriftsHub. All rights reserved.</p>
+      <div className="footer-links">
+        <Link to="/Home">Home</Link>
+        <Link to="/Log-in">Log-in</Link>
+        <Link to="/Explore">Explore</Link>
+      </div>
+    </footer>
+  );
+}
+
+export default Footer;

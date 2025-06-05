@@ -24,8 +24,8 @@
   
   .recipe-form button {
     padding: 0.75rem;
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--color-accent);
+    color: var(--color-dark);
     font-weight: bold;
     border: none;
     border-radius: 4px;

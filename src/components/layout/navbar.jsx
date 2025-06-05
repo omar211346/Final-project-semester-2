@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../lib/firebaseConfig";
+import "../../styles/navbar.css";
 
 function Navbar() {
   const [user, setUser] = useState(null);
@@ -37,7 +38,6 @@ function Navbar() {
       ) : (
         <>
           <Link to="/login">Login</Link> |{" "}
-          <Link to="/signup">Signup</Link>
         </>
       )}
     </nav>

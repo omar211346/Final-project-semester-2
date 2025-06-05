@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import RecipeForm from "../components/recipe/RecipeForm";
 import { getRecipeById, updateRecipe } from "../lib/firestore";
+import "../styles/editrecipe.css";
 
 function EditRecipe() {
   const { id } = useParams();

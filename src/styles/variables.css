@@ -5,10 +5,11 @@
   
     --color-primary: #4CAF50;
     --color-secondary: #f9f9f9;
+    --color-accent: green; 
     --color-text: #222;
     --color-error: #d62828;
     --color-success: #2b9348;
-  
+  --color-dark: white; 
     --radius: 6px;
     --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     --max-width: 900px;

@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { addRecipe } from "../../lib/firestore";
 import "../../styles/externalrecipecard.css";
 
-
 function ExternalRecipeCard({ meal }) {
   const navigate = useNavigate();
 
