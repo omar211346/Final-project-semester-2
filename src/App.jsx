@@ -10,9 +10,9 @@ import ExternalRecipeDetails from "./pages/ExternalRecipeDetails";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import "./reset.css";
-import "./variables.css";
-import "./app.css";
+import "./styles/reset.css";
+import "./styles/variables.css";
+import "./styles/app.css";
 function App() {
   return (
     <>
@@ -29,6 +29,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path= "/login" element={<Login />} />
         <Route path= "/Profile" element={<Profile />} />
+      
+
       </Routes>
     </>
   );

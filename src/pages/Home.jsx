@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getAllRecipes } from "../lib/firestore";
 import RecipeCard from "../components/recipe/RecipeCard";
+import "../styles/Home.css";
+
 
 function Home() {
   const [recipes, setRecipes] = useState([]);

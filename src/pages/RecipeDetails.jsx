@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getRecipeById } from "../lib/firestore";
 
+
 function RecipeDetails() {
   const { id } = useParams();
   const navigate = useNavigate();

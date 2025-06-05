@@ -1,0 +1,98 @@
+.my-recipes-page {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fefefe;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    background-color: #faf9f6;
+  }
+  
+  .my-recipes-page h2 {
+    font-family: "Lato-Bold";
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #333;
+  }
+  
+  .feedback-message,
+  .error-message {
+    padding: 0.5rem;
+    margin: 1rem 0;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+  
+  .feedback-message {
+    background-color: #e6ffec;
+    color: #257942;
+  }
+  
+  .error-message {
+    background-color: #ffe6e6;
+    color: #b30000;
+  }
+  
+  .recipe-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .recipe-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: white;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .recipe-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .recipe-card img {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+  }
+  
+  .recipe-card h3 {
+    font-size: 1.4rem;
+    font-family: "Roboto-Bold";
+    margin-bottom: 0.5rem;
+    color: #222;
+  }
+  
+  .recipe-card p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem;
+    color: #444;
+  }
+  
+  .recipe-card button {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .recipe-card button:hover {
+    background-color: #3e8e41;
+  }
+  
+  .recipe-card button:last-child {
+    background-color: #d9534f;
+  }
+  
+  .recipe-card button:last-child:hover {
+    background-color: #c9302c;
+  }
+  

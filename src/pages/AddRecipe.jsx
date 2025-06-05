@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RecipeForm from "../components/recipe/RecipeForm";
 import { addRecipe } from "../lib/firestore"; 
+import "../styles/addrecipe.css";
 
 function AddRecipe() {
   const [message, setMessage] = useState(null);

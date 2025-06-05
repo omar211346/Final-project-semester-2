@@ -1,0 +1,44 @@
+
+.home-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--background);
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .home-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-family: "Lato-Bold", sans-serif;
+  }
+  
+  .home-container p {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+  }
+  
+  .teaser-list {
+    background-color: var(--light-grey);
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+  
+  .teaser-list h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+  }
+  
+  .teaser-list h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .teaser-list p {
+    margin: 0.3rem 0;
+    font-size: 0.95rem; }

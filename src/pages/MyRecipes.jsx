@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllRecipes, deleteRecipe } from "../lib/firestore";
+import "../styles/myrecipe.css";
 
 function MyRecipes() {
   const navigate = useNavigate();

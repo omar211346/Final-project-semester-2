@@ -21,11 +21,119 @@
     src: url("./fonts/Roboto-Black.ttf") format("truetype");
     font-weight: 900;
   }
-  
-  body {
-    font-family: var(--font-primary);
-    background-color: var(--color-secondary);
-    color: var(--color-text);
-    line-height: 1.6;
-    padding: 2rem;
-  }
+  @import url("./reset.css");
+@import url("./variables.css");
+
+/* app.css */
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.6;
+  padding: var(--spacing-md);
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--color-dark);
+  padding: var(--spacing-sm);
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.navbar a {
+  color: var(--color-light);
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* Home */
+.home-container,
+.my-recipes-page,
+.add-recipe-page,
+.signup-page,
+.login-page,
+.recipe-details-page,
+.external-recipes-page,
+.external-recipe-details-page,
+.profile-page {
+  padding: var(--spacing-lg);
+}
+
+/* Search / Filter / Sort / Random */
+.category-filter select,
+.random-button button,
+.sort-dropdown select,
+.search-bar input {
+  padding: var(--spacing-sm);
+  margin-right: var(--spacing-sm);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+}
+
+/* Recipe Card */
+.recipe-card,
+.external-recipe-card {
+  background: var(--color-light);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.recipe-card img,
+.external-recipe-card img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: var(--radius);
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Recipe List */
+.recipe-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* Buttons */
+button {
+  background-color: var(--color-accent);
+  color: var(--color-dark);
+  border: 2px solid var(--color-border);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius);
+
+}
+
+
+/* Messages */
+.feedback-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  border-radius: var(--radius);
+}
+
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  border-radius: var(--radius);
+}
+
+/* Print hint */
+.print-hint-box {
+  background-color: var(--color-border);
+  padding: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  border-radius: var(--radius);
+}
+;
